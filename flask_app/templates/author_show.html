@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename ='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>Authors Favorites</title>
+</head>
+
+<body>
+    <div class="container d-flex mb-3">
+        <div class="container">
+            <h2 class="text-center">{{ author[0].name }} Favorites</h2>
+            <div class="container d-flex flex-column border border-2 border-dark w-50">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Book Title</th>
+                            <th>Number of Pages</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fav in favorites %}
+                        <tr>
+                            <td>{{ fav.title }}</td>
+                            <td>{{ fav.num_of_pages }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container d-flex flex-column align-items-center w-75">
+            <h2 class="text-center mb-3">Add New Favorite</h2>
+            <form action="/authors/show/add" method="POST">
+                <select name="new_book" >
+                    {% for book in books %}
+                        <option value="{{ book.id }} ">{{ book.title }} </option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="user_id" value="{{ author[0].id }}">
+                <input type="submit" value="Add to Favorites">
+            </form>
+        </div>
+    </div>
+    <span class="ms-5"><a class="ms-5" href="/authors">HOME</a></span>
+</body>
+
+</html>

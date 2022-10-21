@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename ='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>Authors</title>
+</head>
+
+<body>
+    <div class="container d-flex">
+        <div class="container">
+            <h2 class="text-center">Add New Author</h2>
+            <form action="/authors/add" method="POST" class="form-control bg-secondary w-75">
+                <div class="d-flex justify-content-around align-items-center">
+                    <label for="author" class="form-label mt-2 text-warning">New Author: </label>
+                    <input type="text" class="form-control mt-2 mb-3 w-50" name="author">
+                </div>
+                <span class="d-flex justify-content-center"><input type="submit" value="Add Author"></span>
+            </form>
+        </div>
+        <div class="container d-flex flex-column w-75">
+            <h2 class="text-center">Current Authors</h2>
+            <div class="container d-flex flex-column border border-2 border-dark w-50 p-2">
+                {% for author in authors %}
+                <a href="/authors/show/{{ author.id }}" class="text-center">{{ author.name }}</a>
+                {% endfor %}
+            </div>
+            <a class="mt-5 text-center" href="/books">Add New Book</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
